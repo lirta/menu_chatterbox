@@ -68,7 +68,7 @@ class SignInActivity : AppCompatActivity() {
     private fun pushLogin(iUsername: String, iPassword: String) {
         mDatabase.child(iUsername).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
+var saldo=100000
                 val user = dataSnapshot.getValue(User::class.java)
                 if (user == null) {
                     Toast.makeText(this@SignInActivity, "User tidak ditemukan", Toast.LENGTH_LONG).show()
@@ -81,7 +81,7 @@ class SignInActivity : AppCompatActivity() {
                         preferences.setValues("user", user.username.toString())
                         preferences.setValues("url", user.url.toString())
                         preferences.setValues("email", user.email.toString())
-                        preferences.setValues("saldo", user.saldo.toString())
+                        preferences.setValues("saldo", "100000")
                         preferences.setValues("status", "1")
 
                         finishAffinity()

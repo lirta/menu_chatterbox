@@ -12,9 +12,9 @@ import com.example.myapplication.R
 import com.example.myapplication.home.model.Menu
 
 
-class ComingSoonAdapter(private var data: ArrayList<Menu>,
-                        private val listener: (Menu) -> Unit)
-    : RecyclerView.Adapter<ComingSoonAdapter.LeagueViewHolder>() {
+class KomplitAdapter(private var data: ArrayList<Menu>,
+                     private val listener: (Menu) -> Unit)
+    : RecyclerView.Adapter<KomplitAdapter.LeagueViewHolder>() {
 
     lateinit var ContextAdapter : Context
 
@@ -49,10 +49,26 @@ class ComingSoonAdapter(private var data: ArrayList<Menu>,
             Glide.with(context)
                 .load(data.poster)
                 .into(tvImage);
+            var status:Boolean=false
+            var totalk:Int=0
 
-//            itemView.setOnClickListener {
-//                listener(data)
-//            }
+            itemView.setOnClickListener {
+                if (status) {
+                    itemView.setBackgroundResource(R.drawable.shape_background_blue)
+                    status = false
+                    totalk -=1
+
+
+                } else {
+                    itemView.setBackgroundResource(R.drawable.shape_background_menu)
+                    status = true
+                    totalk +=1
+//                    belitiket(total)
+//
+//                    val data = Checkout("A1")
+//                    dataList.add(data)
+                }
+            }
         }
 
     }

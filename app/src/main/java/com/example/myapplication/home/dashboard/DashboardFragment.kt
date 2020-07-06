@@ -49,7 +49,9 @@ class DashboardFragment : Fragment() {
         mDatabase = FirebaseDatabase.getInstance().getReference("Komplit")
 
         tv_nama.setText(preferences.getValues("nama"))
-
+        if (!preferences.getValues("saldo").equals("")){
+            currecy(preferences.getValues("saldo")!!.toDouble(), tv_saldo)
+        }
 
 
         Glide.with(this)
@@ -79,15 +81,9 @@ class DashboardFragment : Fragment() {
                 }
 
                 if (dataList.isNotEmpty()) {
-//                    rv_now_playing.adapter = NowPlayingAdapter(dataList) {
-//                        val intent = Intent(
-//                            context,
-//                            DetailActivity::class.java
-//                        ).putExtra("data", it)
-//                        startActivity(intent)
-//                    }
 
-                    rv_coming_soon.adapter = ComingSoonAdapter(dataList) {
+
+                    rv_coming_soon.adapter = KomplitAdapter(dataList) {
                         val intent = Intent(
                             context,
                             DetailActivity::class.java

@@ -50,9 +50,9 @@ class MakananAdapter(private var data: ArrayList<Makanan>,
                 .load(data.poster)
                 .into(tvImage);
 
-//            itemView.setOnClickListener {
-//                listener(data)
-//            }
+            itemView.setOnClickListener {
+                listener(data)
+            }
         }
 
     }

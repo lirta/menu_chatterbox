@@ -1,19 +1,6 @@
 package com.example.myapplication.home
 
-import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.R
-import com.example.myapplication.home.dashboard.ComingSoonAdapter
-import com.example.myapplication.home.model.Minuman
-import com.example.myapplication.utils.Preferences
-import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_tiket.*
 
 
 /**
