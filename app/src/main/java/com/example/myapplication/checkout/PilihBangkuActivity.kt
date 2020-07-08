@@ -6,8 +6,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
 import com.example.myapplication.checkout.model.Checkout
-import com.example.myapplication.home.model.Film
-import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_detail.tv_kursi
 import kotlinx.android.synthetic.main.activity_pilih_bangku.*
 
@@ -24,9 +22,9 @@ class PilihBangkuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pilih_bangku)
 
-        val data = intent.getParcelableExtra<Film>("data")
-
-        tv_kursi.text = data.judul
+//        val data = intent.getParcelableExtra<Film>("data")
+//
+//        tv_kursi.text = data.judul
 
         a3.setOnClickListener {
             if (statusA3) {
@@ -68,7 +66,7 @@ class PilihBangkuActivity : AppCompatActivity() {
                 val intent = Intent(
                     this,
                     CheckoutActivity::class.java
-                ).putExtra("data", dataList).putExtra("datas", data)
+                ).putExtra("data", dataList)
                 startActivity(intent)
         }
 

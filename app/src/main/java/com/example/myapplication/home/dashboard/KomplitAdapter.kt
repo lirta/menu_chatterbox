@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.checkout.model.Order
 import com.example.myapplication.home.model.Menu
 
 
@@ -17,6 +18,8 @@ class KomplitAdapter(private var data: ArrayList<Menu>,
     : RecyclerView.Adapter<KomplitAdapter.LeagueViewHolder>() {
 
     lateinit var ContextAdapter : Context
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeagueViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -51,7 +54,7 @@ class KomplitAdapter(private var data: ArrayList<Menu>,
                 .into(tvImage);
             var status:Boolean=false
             var totalk:Int=0
-
+            var dataList= ArrayList<Order>()
             itemView.setOnClickListener {
                 if (status) {
                     itemView.setBackgroundResource(R.drawable.shape_background_blue)
@@ -63,6 +66,8 @@ class KomplitAdapter(private var data: ArrayList<Menu>,
                     itemView.setBackgroundResource(R.drawable.shape_background_menu)
                     status = true
                     totalk +=1
+                    val datao=Order(data.nama,data.harga,"1")
+                    dataList.add(datao)
 //                    belitiket(total)
 //
 //                    val data = Checkout("A1")

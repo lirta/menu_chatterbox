@@ -7,7 +7,6 @@ import com.bagicode.bwamov.home.TiketAdapter
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.checkout.model.Checkout
-import com.example.myapplication.home.model.Film
 import kotlinx.android.synthetic.main.activity_tiket.*
 
 
@@ -19,15 +18,15 @@ class TiketActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tiket)
 
-        val data = intent.getParcelableExtra<Film>("data")
-
-        tv_title.text = data.judul
-        tv_genre.text = data.genre
-        tv_rate.text = data.rating
-
-        Glide.with(this)
-            .load(data.poster)
-            .into(iv_poster_image)
+//        val data = intent.getParcelableExtra<Film>("data")
+//
+//        tv_title.text = data.judul
+//        tv_genre.text = data.genre
+//        tv_rate.text = data.rating
+//
+//        Glide.with(this)
+//            .load(data.poster)
+//            .into(iv_poster_image)
 
         rc_checkout.layoutManager = LinearLayoutManager(this)
         dataList.add(Checkout("C1",""))

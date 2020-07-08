@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.DetailActivity
 import com.example.myapplication.R
+import com.example.myapplication.checkout.PilihBangkuActivity
 import com.example.myapplication.home.model.Menu
 import com.example.myapplication.utils.Preferences
 import com.google.firebase.database.*
@@ -86,8 +87,8 @@ class DashboardFragment : Fragment() {
                     rv_coming_soon.adapter = KomplitAdapter(dataList) {
                         val intent = Intent(
                             context,
-                            DetailActivity::class.java
-                        ).putExtra("data", it)
+                            PilihBangkuActivity::class.java
+                        ).putExtra("datao", it)
                         startActivity(intent)
                     }
                 }
