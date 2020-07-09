@@ -36,6 +36,7 @@ class CheckoutActivity : AppCompatActivity() {
         }
 //        total=data.harga!!.toInt()
 //
+
         dataList.add(Order("Total Harus Dibayar",total.toString()))
 //
         btn_order.setOnClickListener {
