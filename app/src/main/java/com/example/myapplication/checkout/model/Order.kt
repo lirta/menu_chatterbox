@@ -5,9 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Order (
-    var nama: String ?="",
-    var harga: String ?="",
-    var total: String ?="",
-    var kursi: String ?=""
+//    var nama: String ?="",
+//    var harga: String ?="",
+//    var total: String ?="",
+    var kursi: String ?="",
+    var harga: String ?=""
 
 ): Parcelable

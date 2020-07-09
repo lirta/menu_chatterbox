@@ -1,21 +1,14 @@
 package com.example.myapplication.checkout
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.checkout.adapter.CheckoutAdapter
-import com.example.myapplication.checkout.model.Checkout
-import com.example.myapplication.home.TiketActivity
+import com.example.myapplication.checkout.model.Order
+import com.example.myapplication.home.model.Menu
 import com.example.myapplication.utils.Preferences
 import kotlinx.android.synthetic.main.activity_checkout.*
 import java.text.NumberFormat
@@ -25,7 +18,7 @@ import kotlin.collections.ArrayList
 
 class CheckoutActivity : AppCompatActivity() {
 
-    private var dataList = ArrayList<Checkout>()
+    private var dataList = ArrayList<Order>()
     private var total:Int = 0
 
     private lateinit var preferences: Preferences
@@ -33,50 +26,51 @@ class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
+
+        preferences = Preferences(this)
+        dataList = intent.getSerializableExtra("data") as ArrayList<Order>
+        val data = intent.getParcelableExtra<Menu>("datas")
 //
-//        preferences = Preferences(this)
-//        dataList = intent.getSerializableExtra("data") as ArrayList<Checkout>
-//        val data = intent.getParcelableExtra<Film>("datas")
+        for (a in dataList.indices){
+            total += dataList[a].harga!!.toInt()
+        }
+//        total=data.harga!!.toInt()
 //
-//        for (a in dataList.indices){
-//            total += dataList[a].harga!!.toInt()
-//        }
+        dataList.add(Order("Total Harus Dibayar",total.toString()))
 //
-//        dataList.add(Checkout("Total Harus Dibayar", total.toString()))
-//
-//        btn_tiket.setOnClickListener {
-//            val intent = Intent(this@CheckoutActivity,
-//                CheckoutSuccessActivity::class.java)
-//            startActivity(intent)
-//
+        btn_order.setOnClickListener {
+            val intent = Intent(this@CheckoutActivity,
+                CheckoutSuccessActivity::class.java)
+            startActivity(intent)
+
 //            showNotif(data)
-//        }
+        }
+
+        btn_home.setOnClickListener {
+            finish()
+        }
 //
-//        btn_home.setOnClickListener {
-//            finish()
-//        }
+        rc_checkout.layoutManager = LinearLayoutManager(this)
+        rc_checkout.adapter = CheckoutAdapter(dataList) {
+        }
 //
-//        rc_checkout.layoutManager = LinearLayoutManager(this)
-//        rc_checkout.adapter = CheckoutAdapter(dataList) {
-//        }
+        if(preferences.getValues("saldo")!!.isNotEmpty()) {
+            val localeID = Locale("in", "ID")
+            val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
+            tv_saldo.setText(formatRupiah.format(preferences.getValues("saldo")!!.toDouble()))
+            btn_order.visibility = View.VISIBLE
+            textView3.visibility = View.INVISIBLE
+
+        } else {
+            tv_saldo.setText("Rp 0")
+            btn_order.visibility = View.INVISIBLE
+            textView3.visibility = View.VISIBLE
+            textView3.text = "Saldo pada e-wallet kamu tidak mencukupi\n" +
+                    "untuk melakukan transaksi"
+        }
+    }
 //
-//        if(preferences.getValues("saldo")!!.isNotEmpty()) {
-//            val localeID = Locale("in", "ID")
-//            val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
-//            tv_saldo.setText(formatRupiah.format(preferences.getValues("saldo")!!.toDouble()))
-//            btn_tiket.visibility = View.VISIBLE
-//            textView3.visibility = View.INVISIBLE
-//
-//        } else {
-//            tv_saldo.setText("Rp 0")
-//            btn_tiket.visibility = View.INVISIBLE
-//            textView3.visibility = View.VISIBLE
-//            textView3.text = "Saldo pada e-wallet kamu tidak mencukupi\n" +
-//                    "untuk melakukan transaksi"
-//        }
-//    }
-//
-//    private fun showNotif(datas: Film) {
+//    private fun showNotif(datas: Menu) {
 //        val NOTIFICATION_CHANNEL_ID = "channel_bwa_notif"
 //        val context = this.applicationContext
 //        var notificationManager =
@@ -90,10 +84,10 @@ class CheckoutActivity : AppCompatActivity() {
 //            notificationManager.createNotificationChannel(mChannel)
 //        }
 //
-////        val mIntent = Intent(this, CheckoutSuccessActivity::class.java)
-////        val bundle = Bundle()
-////        bundle.putString("id", "id_film")
-////        mIntent.putExtras(bundle)
+//        val mIntent = Intent(this, CheckoutSuccessActivity::class.java)
+//        val bundle = Bundle()
+//        bundle.putString("id", "id_film")
+//        mIntent.putExtras(bundle)
 //
 //        val mIntent = Intent(this, TiketActivity::class.java)
 //        val bundle = Bundle()
@@ -118,9 +112,9 @@ class CheckoutActivity : AppCompatActivity() {
 //            .setLights(Color.RED, 3000, 3000)
 //            .setDefaults(Notification.DEFAULT_SOUND)
 //            .setContentTitle("Sukses Terbeli")
-//            .setContentText("Tiket "+datas.judul+" berhasil kamu dapatkan. Enjoy the movie!")
+//            .setContentText("Menu "+datas.nama+" berhasil kamu order. Enjoy the menu!")
 //
 //        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 //        notificationManager.notify(115, builder.build())
-    }
+//    }
 }

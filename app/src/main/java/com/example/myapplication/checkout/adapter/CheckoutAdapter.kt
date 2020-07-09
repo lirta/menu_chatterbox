@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.checkout.model.Checkout
+import com.example.myapplication.checkout.model.Order
 import java.text.NumberFormat
 import java.util.*
 
 
-class CheckoutAdapter(private var data: List<Checkout>,
-                      private val listener: (Checkout) -> Unit)
+class CheckoutAdapter(private var data: List<Order>,
+                      private val listener: (Order) -> Unit)
     : RecyclerView.Adapter<CheckoutAdapter.LeagueViewHolder>() {
 
     lateinit var ContextAdapter : Context
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeagueViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -38,9 +39,9 @@ class CheckoutAdapter(private var data: List<Checkout>,
         private val tvHarga: TextView = view.findViewById(R.id.tv_harga)
 
 
-        fun bindItem(data: Checkout, listener: (Checkout) -> Unit, context : Context, position : Int) {
+        fun bindItem(data: Order, listener: (Order) -> Unit, context: Context, position: Int) {
 
-
+//
             val localeID = Locale("in", "ID")
             val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
             tvHarga.setText(formatRupiah.format(data.harga!!.toDouble()))
